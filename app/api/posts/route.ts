@@ -212,7 +212,7 @@ function mapPost(row: PostRow) {
     title: row.title,
     excerpt: row.excerpt,
     content: row.content,
-    coverImage: row.cover_image,
+    coverImage: row.cover_image ?? undefined,
     tags: row.tags,
     authorEmail: row.author_email,
     authorName: row.author_name,

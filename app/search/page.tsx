@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import useSWR from 'swr';
 import { PostCard } from '@/components/PostCard';
@@ -11,7 +11,7 @@ type Post = {
   slug: string;
   title: string;
   excerpt: string;
-  coverImage: string;
+  coverImage?: string;
   tags: string[];
   createdAt: string;
   authorName: string;
@@ -21,7 +21,7 @@ type Post = {
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export default function SearchPage() {
+function SearchContent() {
   const [query, setQuery] = useState('');
   const [debounced, setDebounced] = useState('');
   const searchParams = useSearchParams();
@@ -89,6 +89,14 @@ export default function SearchPage() {
         />
       )}
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<div className="space-y-6"><div className="text-zinc-500">Loading search...</div></div>}>
+      <SearchContent />
+    </Suspense>
   );
 }
 

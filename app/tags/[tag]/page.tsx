@@ -80,7 +80,7 @@ function mapPost(row: PostRow) {
     slug: row.slug,
     title: row.title,
     excerpt: row.excerpt,
-    coverImage: row.cover_image,
+    coverImage: row.cover_image ?? undefined,
     authorName: row.author_name,
     authorEmail: row.author_email,
     createdAt: row.created_at,

@@ -81,7 +81,7 @@ export function CommentsSection({ postId }: { postId: string }) {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-xl font-semibold">Comments</h3>
+      <h3 className="text-xl text-zinc-600 font-semibold">Comments</h3>
       {session ? (
         <div className="space-y-2">
           <textarea
@@ -99,7 +99,7 @@ export function CommentsSection({ postId }: { postId: string }) {
           </button>
         </div>
       ) : (
-        <p className="text-sm text-zinc-500">Sign in to comment.</p>
+        <p className="text-sm text-gray-500">Sign in to comment.</p>
       )}
 
       <ul className="space-y-3">
@@ -111,7 +111,7 @@ export function CommentsSection({ postId }: { postId: string }) {
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
                     <p className="text-sm font-semibold text-zinc-900">{comment.authorName}</p>
-                    <p className="text-xs text-zinc-500">{new Date(comment.createdAt).toLocaleString()}</p>
+                    <p className="text-xs text-gray-500">{new Date(comment.createdAt).toLocaleString()}</p>
                   </div>
                   <p className="mt-2 text-sm text-zinc-900 leading-relaxed">{comment.body}</p>
                 </div>

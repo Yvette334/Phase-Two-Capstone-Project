@@ -9,39 +9,14 @@ import Image from 'next/image';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { MarkdownImage } from '@/components/MarkdownImage';
 
-const starter = `# Title
-
-Write your post using **Markdown** or regular text.
-
-## Tips
-- Drag in images or paste URLs
-- Use \`###\` for headings
-- Publish when ready`;
-
 export default function EditorPage() {
   const { data: session } = useSession();
   const router = useRouter();
-  const [content, setContent] = useState(starter);
+  const [content, setContent] = useState('');
   const [title, setTitle] = useState('My new post');
   const [coverImage, setCoverImage] = useState('');
   const [tags, setTags] = useState('nextjs,react');
   const [saving, setSaving] = useState(false);
-
-  function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      const dataUrl = reader.result as string;
-      // Add to markdown content
-      setContent((prev) => `${prev}\n\n![uploaded image](${dataUrl})`);
-      // Also set as cover image if not already set
-      if (!coverImage) {
-        setCoverImage(dataUrl);
-      }
-    };
-    reader.readAsDataURL(file);
-  }
 
   function handleCoverImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -134,24 +109,12 @@ export default function EditorPage() {
                   src={coverImage}
                   alt="Cover preview"
                   width={600}
-                  height={128}
-                  className="h-32 w-full rounded border border-zinc-200 object-cover"
+                  height={300}
+                  className="h-64 w-full rounded border border-zinc-200 object-cover"
                   unoptimized
                 />
               </div>
             )}
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-zinc-600">Add Image to Content</label>
-            <label className="block cursor-pointer rounded-lg border-2 border-zinc-300 bg-white px-4 py-2.5 text-sm font-medium text-zinc-700 hover:bg-zinc-50 hover:border-zinc-400 transition-colors">
-              Upload Image to Content
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="hidden"
-              />
-            </label>
           </div>
           <div className="space-y-1">
             <label className="text-sm font-medium text-zinc-700">Tags</label>
@@ -163,13 +126,13 @@ export default function EditorPage() {
             />
           </div>
           <div className="space-y-1">
-            <label className="text-sm font-medium text-zinc-700">Content (Markdown)</label>
+            <label className="text-sm font-medium text-zinc-700">Content</label>
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
               rows={16}
               className="w-full rounded-lg border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-900 placeholder:text-zinc-400 font-mono focus:border-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-200 resize-y"
-              placeholder="Write your post content using Markdown...&#10;&#10;Use **bold**, *italic*, # headings, and more!"
+              placeholder="# Title&#10;&#10;Write your post using **Markdown** or regular text.&#10;&#10;## Tips&#10;- Paste image URLs directly in markdown&#10;- Use ### for headings&#10;- Use **bold**, *italic*, and more markdown syntax&#10;- Publish when ready"
             />
           </div>
           <div className="flex gap-2">

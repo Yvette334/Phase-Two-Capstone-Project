@@ -56,7 +56,7 @@ export default function ProfilePage() {
               </div>
             )}
             <div>
-              <h1 className="text-2xl font-semibold">{profile?.name || 'Anonymous'}</h1>
+              <h1 className="text-2xl text-zinc-400 font-semibold">{profile?.name || 'Anonymous'}</h1>
               <p className="text-sm text-zinc-500">{email}</p>
             </div>
           </div>
@@ -70,14 +70,14 @@ export default function ProfilePage() {
         </div>
 
         <div className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm">
-          <h2 className="text-xl font-semibold">Posts by you</h2>
+          <h2 className="text-xl text-zinc-600 font-semibold">Posts by you</h2>
           {authored.length === 0 ? (
             <p className="mt-2 text-sm text-zinc-500">No posts yet.</p>
           ) : (
             <ul className="mt-4 space-y-3">
               {authored.map((post) => (
                 <li key={post.id} className="rounded border border-zinc-100 p-3">
-                  <div className="text-sm font-semibold">{post.title}</div>
+                  <div className="text-sm text-zinc-500 font-semibold">{post.title}</div>
                   <div className="text-xs text-zinc-500">
                     {new Date(post.createdAt).toLocaleString()}
                   </div>

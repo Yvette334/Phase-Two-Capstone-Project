@@ -91,7 +91,7 @@ Before you begin, ensure you have the following installed:
 
 ```bash
 git clone https://github.com/Yvette334/Phase-Two-Capstone-Project.git
-cd medium
+cd Phase-Two-Capstone-Project
 ```
 
 ### 2. Install Dependencies
